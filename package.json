@@ -15,5 +15,12 @@
   "bugs": {
     "url": "https://github.com/linh1987/csspurger/issues"
   },
-  "homepage": "https://github.com/linh1987/csspurger#readme"
+  "homepage": "https://github.com/linh1987/csspurger#readme",
+  "dependencies": {
+    "assemble": "^0.16.1",
+    "gulp-extname": "^0.2.2"
+  },
+  "devDependencies": {
+    "assemble": "^0.16.1"
+  }
 }
