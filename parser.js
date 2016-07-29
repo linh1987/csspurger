@@ -9,7 +9,6 @@ function parse(rawCss) {
 	var selectors = [];
 	visit(ast, function(node){
 		if (node.type==='rule') {
-			
 			var selectorInfos = node.selectors.map(function(sel){
 				return {
 					selector: sel,
@@ -31,7 +30,7 @@ function visit(node, visitor) {
 	switch(node.type) {
 		case 'stylesheet':
 			visitor(node);
-			for(var i=0, rule = node.stylesheet.rules[i]; i < node.stylesheet.rules.length; i++) {
+			for(var rule of node.stylesheet.rules) {
 				visit(rule, visitor);
 			}
 			if (node.parsingErrors && node.parsingErrors.length) {
@@ -43,7 +42,7 @@ function visit(node, visitor) {
 			break;
 		case 'media':
 			visitor(node);
-			for(var i=0, rule = node.rules[i]; i < node.rules.length; i++) {
+			for(var rule of node.rules) {
 				visit(rule, visitor);
 			}
 			break;
