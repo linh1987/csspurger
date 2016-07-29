@@ -20,9 +20,12 @@ nightmare
             var cssData = [];
             
             for(var i=0; i < links.length; i++){
-                request(links[0], function (error, response, body) {
+                request(links[i], function (error, response, body) {
                     if (!error && response.statusCode == 200){
-                        cssData.push(body);
+                        cssData.push({
+                            link: links[i],
+                            body: body
+                        });
                     }
                     
                     if (cssData.length === links.length) {
@@ -32,55 +35,66 @@ nightmare
             }
         });
     })
-    .then(function(cssContents){
-      var allSelectors = [];
-      for(var cssContent of cssContents) {
-        var selectors = parse(cssContent);
-        Array.prototype.push.apply(allSelectors, selectors);
+    .then(function(cssInfos){
+      for(var cssInfo of cssInfos) {
+        var selectors = parse(cssInfo.body);
+        cssInfo.selectors = selectors;
       }
-      return allSelectors;
+      return cssInfos;
     })
-    .then(function(allSelectors){
+    .then(function(cssInfos){
         var sub = Nightmare({ show: false })
         return sub.goto(url)
-            .evaluate(function(selectors) {
-                for(var i=0, selector = selectors[i]; i< selectors.lenth; i++) {
-                    var count = document.querySelectorAll(selector).length;
-                    selector.count = count;
+            .evaluate(function(cssInfos) {
+                for(var i=0, cssInfo = cssInfos[i]; i< cssInfos.lenth; i++) {
+                    for(var j=0, selector = cssInfo.selectors[j]; j< cssInfo.selectors.length; j++){
+                        var count = document.querySelectorAll(selector).length;
+                        selector.count = count;    
+                    }
                 }
-                return selectors;
-            }, allSelectors)
-            .then(function(selectors) {
-                return selectors;
+                return cssInfos;
+            }, cssInfos)
+            .then(function(cssInfos) {
+                return cssInfos;
             })
             .catch(function (error) {
                 console.error(error);
             });    
     })
-    .then(function(selectors){
+    .then(function(cssInfos){
         
-        var count = selectors.length;
-        var unusedCnt = selectors.filter(function(sel){ return sel.count == 0; });
-        var moderateCnt = selectors.filter(function(sel){ return sel.count > 0 && sel.count < 5; });
-        var heavyCnt = selectors.filter(function(sel){ return sel.count >=5; });
+        
         var result = {
             "website": "",
             "url": url,
-            "statistics": [
-                {
-                    "title": "Unused",
-                    "percentage": unusedCnt / count
-                },
-                {
-                    "title": "Moderately Used",
-                    "percentage": moderateCnt / count
-                },
-                {
-                    "title": "Heavily Used",
-                    "percentage": heavyCnt / count
-                }
-            ],
-            "obsoletedselectors": selectors
+            "stylesheets": cssInfos.map(function(css){
+                var count = css.selectors.length;
+                var unusedCnt = css.selectors.filter(function(sel){ return sel.count == 0; }).length;
+                var moderateCnt = css.selectors.filter(function(sel){ return sel.count > 0 && sel.count < 5; }).length;
+                var heavyCnt = css.selectors.filter(function(sel){ return sel.count >=5; }).length;
+                return {
+                    "link":css.link,
+                    "statistics": [
+                        {
+                            "title": "Unused",
+                            "color": "#ef3c79",
+                            "percentage": unusedCnt / count
+                        },
+                        {
+                            "title": "Moderately Used",
+                            "color": "#ba65c9",
+                            "percentage": moderateCnt / count
+                        },
+                        {
+                            "title": "Heavily Used",
+                            "percentage": heavyCnt / count,
+                            "color": "#acec00"
+                        }
+                    ],
+                    "obsoletedselectors": css.selectors
+                };
+            }),
+            
         };
         fs.writeFile('./data/data.json', JSON.stringify(result), function(err) {
             if(err) {
