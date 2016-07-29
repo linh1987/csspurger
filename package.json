@@ -17,8 +17,10 @@
   },
   "homepage": "https://github.com/linh1987/csspurger#readme",
   "dependencies": {
-    "css": "^2.2.1",
     "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-watch": "^4.3.9",
+    "css": "^2.2.1",
     "nightmare": "^2.5.3",
     "phantomjs-prebuilt": "^2.1.8"
   },
