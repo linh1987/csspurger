@@ -7,6 +7,9 @@ $(document).ready(function() {
       $(this).closest('.section--stylesheet').find('.selector-container').show();
       console.log('done');
     }
-    else $(this).closest('.section--stylesheet').find('.selector-container').hide();
+    else {
+      $(this).closest('.section--stylesheet').find('.selector-container').hide();
+      $(this).closest('.section--stylesheet').find('.selector-container[data-count="0"]').show();
+    }
   });
 });

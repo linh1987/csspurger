@@ -16,14 +16,14 @@
                 "line": 1,
                 "column": 85
             },
-            "count": 0
+            "count": 1
         }, {
             "selector": "article",
             "position": {
                 "line": 1,
                 "column": 99
             },
-            "count": 0
+            "count": 10
         }]
     }, {
         "link": "www.dn.se/sample.css",
