@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/linh1987/csspurger#readme",
   "dependencies": {
-    "gulp": "^3.9.1"
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-watch": "^4.3.9"
   },
   "devDependencies": {
     "gulp": "^3.9.1",

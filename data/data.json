@@ -1,0 +1,53 @@
+{
+    "website": "DN.se",
+    "url": "www.dn.se",
+    "stylesheets": [{
+        "link": "http://www.dn.se/sample.css",
+        "obsoletedselectors": [{
+            "selector": "html",
+            "position": {
+                "line": 1,
+                "column": 1
+            },
+            "count": 0
+        }, {
+            "selector": "body",
+            "position": {
+                "line": 1,
+                "column": 85
+            },
+            "count": 0
+        }, {
+            "selector": "article",
+            "position": {
+                "line": 1,
+                "column": 99
+            },
+            "count": 0
+        }]
+    }, {
+        "link": "www.dn.se/sample.css",
+        "obsoletedselectors": [{
+            "selector": "html",
+            "position": {
+                "line": 1,
+                "column": 1
+            },
+            "count": 0
+        }, {
+            "selector": "body",
+            "position": {
+                "line": 1,
+                "column": 85
+            },
+            "count": 0
+        }, {
+            "selector": "article",
+            "position": {
+                "line": 1,
+                "column": 99
+            },
+            "count": 0
+        }]
+    }]
+}
