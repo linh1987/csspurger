@@ -90,6 +90,8 @@ html, body {
 .mdl-demo .mdl-card__actions a {
   color: #00BCD4;
   margin: 0;
+  display: block;
+  text-align: left;
 }
 .mdl-demo .mdl-card__actions a:hover,
 .mdl-demo .mdl-card__actions a:active {
@@ -182,6 +184,21 @@ html, body {
   text-align: center;
   color: White;
   font-size: 32px;
+}
+
+.mdl-demo section .selector-container {
+  width: 33%;
+  float: left;
+}
+
+.mdl-demo section .selectors-container {
+  width: 100%;
+  display: inline-block;
+}
+
+.mdl-demo section .statistics-container {
+  width: 30%;
+  color: White;
 }
 .mdl-demo section.section--footer .section__circle--big {
   width: 100px;

@@ -2,7 +2,24 @@
     "website": "DN.se",
     "url": "www.dn.se",
     "stylesheets": [{
-        "link": "http://www.dn.se/sample.css",
+        "link": "http://cdn02.dn-static.se/dnse/alma.combined.v75d258c7.css",
+        "statistics": [
+          {
+            "title": "Unused",
+            "percentage": 12,
+            "color": "#ef3c79"
+          },
+          {
+            "title": "Moderately Used",
+            "percentage": 40,
+            "color": "#ba65c9"
+          },
+          {
+            "title": "Heavily Used",
+            "percentage": 48,
+            "color": "#acec00"
+          }
+        ],
         "obsoletedselectors": [{
             "selector": "html",
             "position": {
@@ -24,30 +41,6 @@
                 "column": 99
             },
             "count": 10
-        }]
-    }, {
-        "link": "www.dn.se/sample.css",
-        "obsoletedselectors": [{
-            "selector": "html",
-            "position": {
-                "line": 1,
-                "column": 1
-            },
-            "count": 0
-        }, {
-            "selector": "body",
-            "position": {
-                "line": 1,
-                "column": 85
-            },
-            "count": 0
-        }, {
-            "selector": "article",
-            "position": {
-                "line": 1,
-                "column": 99
-            },
-            "count": 0
         }]
     }]
 }
