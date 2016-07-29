@@ -18,7 +18,7 @@ nightmare
     .then(function (links) {
         return new Promise(function(resolve, reject) {
             var cssData = [];
-            
+
             for(var i=0; i < links.length; i++){
                 request(links[i], function (error, response, body) {
                     if (!error && response.statusCode == 200){
@@ -27,7 +27,7 @@ nightmare
                             body: body
                         });
                     }
-                    
+
                     if (cssData.length === links.length) {
                         resolve(cssData);
                     }
@@ -36,34 +36,49 @@ nightmare
         });
     })
     .then(function(cssInfos){
-      for(var cssInfo of cssInfos) {
-        var selectors = parse(cssInfo.body);
-        cssInfo.selectors = selectors;
-      }
+        for(var i = 0; i < cssInfos.length; i++) {
+            var cssInfo = cssInfos[i];
+            var selectors = parse(cssInfo.body);
+            cssInfo.selectors = selectors;
+        }
       return cssInfos;
     })
     .then(function(cssInfos){
         var sub = Nightmare({ show: false })
+
         return sub.goto(url)
-            .evaluate(function(cssInfos) {
-                for(var i=0, cssInfo = cssInfos[i]; i< cssInfos.lenth; i++) {
-                    for(var j=0, selector = cssInfo.selectors[j]; j< cssInfo.selectors.length; j++){
-                        var count = document.querySelectorAll(selector).length;
-                        selector.count = count;    
-                    }
+            .evaluate(function(data) {
+
+              var result = "";
+
+              var cssInfos = data.cssInfos;
+
+              for (var i = 0; i < cssInfos.length; i++) {
+                var cssInfo = cssInfos[i];
+
+                for (var j = 0; j < cssInfo.selectors.length; j++) {
+                  var selector = cssInfo.selectors[j];
+                  try {
+                    var count = document.querySelectorAll(selector.selector).length;
+                    selector.count = count;
+                  } catch (e) {
+
+                  }
                 }
+              }
+
                 return cssInfos;
-            }, cssInfos)
+            }, { cssInfos: cssInfos})
             .then(function(cssInfos) {
                 return cssInfos;
             })
             .catch(function (error) {
                 console.error(error);
-            });    
+            });
     })
     .then(function(cssInfos){
-        
-        
+
+
         var result = {
             "website": "",
             "url": url,
@@ -78,31 +93,31 @@ nightmare
                         {
                             "title": "Unused",
                             "color": "#ef3c79",
-                            "percentage": unusedCnt / count
+                            "percentage": (unusedCnt / count) * 100
                         },
                         {
                             "title": "Moderately Used",
                             "color": "#ba65c9",
-                            "percentage": moderateCnt / count
+                            "percentage": (moderateCnt / count) * 100
                         },
                         {
                             "title": "Heavily Used",
-                            "percentage": heavyCnt / count,
+                            "percentage": (heavyCnt / count) * 100,
                             "color": "#acec00"
                         }
                     ],
                     "obsoletedselectors": css.selectors
                 };
             }),
-            
+
         };
         fs.writeFile('./data/data.json', JSON.stringify(result), function(err) {
             if(err) {
                 return console.log(err);
             }
-        
+
             console.log("Done");
-        }); 
+        });
         return true;
     })
     .catch(function (error) {

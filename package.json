@@ -21,8 +21,7 @@
     "gulp-clean": "^0.3.2",
     "gulp-watch": "^4.3.9",
     "css": "^2.2.1",
-    "nightmare": "^2.5.3",
-    "phantomjs-prebuilt": "^2.1.8"
+    "nightmare": "^2.5.3"
   },
   "devDependencies": {
     "assemble": "^0.16.1",

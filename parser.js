@@ -17,6 +17,7 @@ function parse(rawCss) {
 						column: node.position.start.column
 					},
 					file: '',
+                   
 					count: 0
 				}
 			});
