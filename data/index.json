@@ -1,0 +1,13 @@
+{
+  "Website": "DN.se",
+  "Url" : "www.dn.se",
+  "Stylesheets": [
+    {
+      "Link": "www.dn.se/sample.css",
+      "ObsoletedRules": [
+        "body",
+        "body .asd"
+      ]
+    }
+  ]
+}

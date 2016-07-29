@@ -21,6 +21,8 @@
   },
   "devDependencies": {
     "gulp": "^3.9.1",
-    "gulp-phantom": "0.0.6"
+    "gulp-phantom": "0.0.6",
+    "assemble": "^0.16.1",
+    "gulp-extname": "^0.2.2"
   }
 }
