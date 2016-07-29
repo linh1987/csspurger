@@ -53,4 +53,4 @@ function visit(node, visitor) {
 	}
 }
 
-module.export = parse;
+module.exports = parse;

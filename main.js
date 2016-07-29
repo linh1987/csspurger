@@ -12,10 +12,13 @@
 //   // handle results 
 // })
 
+
 var Nightmare = require('nightmare');
 var nightmare = Nightmare({ show: false });
 var http = require('http');
-
+var parse = require('./parser.js');
+var report = require('./assembleFile.js');
+ 
 nightmare
   .goto('http://www.niteco.se')
   .evaluate(function () {
@@ -24,9 +27,17 @@ nightmare
       return externCss;
   })
   .end()
-  .then(function (result) {
-    
+  .then(function (links) {
+    //TODO: download links, return
+    console.log(links);
   })
+  .then(function(cssInfos) {
+    for(var cssInfo of cssInfos) {
+      
+      parse(cssInfo.);
+    }
+  })
+  .then()
   .catch(function (error) {
     console.error('Search failed:', error);
   })
